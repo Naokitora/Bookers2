@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <h4 class="" style="color:white">Bookers</h4>
+        </nav>
+        <nav class="nav navbar-nav navbar-right">
+           <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to user_path(current_user.id) do %>
+                <span class="glyphicon glyphicon-home"></span>
+                <span>Home</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to users_path do %>
+                <span class="glyphicon glyphicon-user"></span>
+                <span>Users</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to books_path do %>
+                  <span class="glyphicon glyphicon-book"></span>
+                  <span>Books</span>
+                <% end %>
+              </li>
+              <li>
+                <a data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-in"></span>
+                <span>logout</span>
+                </a>
+              </li>
+            <% else %>
+              <li>
+                <a href="#"><span class="glyphicon glyphicon-home"> </span>
+                <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="/home/about">
+                  <span class="glyphicon glyphicon-link"> </span>
+                  <span>About</span>
+                </a>
+              </li>
+              <li>
+                <a href="/users/sign_up">
+                  <span class="glyphicon glyphicon-edit"></span>
+                  <span>sign Up</span>
+                </a>
+              </li>
+              <li>
+                <a href="/users/sign_in">
+                  <span class="glyphicon glyphicon-log-in"></span>
+                  <span>login</span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </nav>
+    <%= yield %>
+  </body>
+</html>

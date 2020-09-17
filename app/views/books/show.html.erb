@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12" style="color: green">
+			<% if flash[:notice] %>
+				<p><%= flash[:notice] %></p>
+			<% end %>
+		</div>
+		<div class="col-xs-3">
+			<%= render 'books/list', user:@book_show.user, book:@book %>
+		</div>
+		<div class="col-xs-9">
+			<h2>Book detail</h2>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Opinion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<%= link_to user_path(@book_show.user_id) do %>
+							 <%= attachment_image_tag @book_show.user, :profile_image, :fill, 30, 30, fallback: "no_image2.jpg" %><br><%= @book_show.user.name %>
+							 <% end %>
+						</td>
+						<td><%= @book_show.title %></td>
+						<td><%= @book_show.body %></td>
+						<%if @book_show.user.id == current_user.id %>
+							<td><%= link_to "Edit", edit_book_path(@book_show.id), class:"btn btn-success btn-sm" %></td>
+							<td><%= link_to "Destroy",book_path(@book_show.id), method: :delete, class:"btn btn-danger btn-sm" %></td>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+</div>
